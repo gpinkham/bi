@@ -32,6 +32,21 @@ KPIs are for top line metrics that you want to see every day, and will fit into 
 
 Examples of things that fit well as KPI's would be: total sales, number of customers, new accounts, and number of cancelled customers.
 
+Here's an example of how you need to structure a kpi query. You need to be pretty specific about the naming, but you get a lof of easy analysis in return.
+
+      SELECT '<%=kpi_date%>' as date,
+      COUNT(CASE WHEN a.registered_at BETWEEN '<%=today_start%>' AND '<%=end_date%>' THEN a.id ELSE NULL END) as Today,
+      COUNT(CASE WHEN a.registered_at BETWEEN '<%=seven_day_start%>' AND '<%=end_date%>' THEN a.id ELSE NULL END) as T7Days,
+      COUNT(CASE WHEN a.registered_at BETWEEN '<%=thirty_day_start%>' AND '<%=end_date%>' THEN a.id ELSE NULL END) as T30Days,
+      COUNT(CASE WHEN a.registered_at BETWEEN '<%=quarter_start%>' AND '<%=end_date%>' THEN a.id ELSE NULL END) as QTD,
+      COUNT(CASE WHEN a.registered_at BETWEEN '<%=year_start%>' AND '<%=end_date%>' THEN a.id ELSE NULL END) as YTD
+      FROM accounts a
+      WHERE a.registered_at BETWEEN '<%=start_date%>' AND '<%=end_date%>'
+
+There is a rake task that will run all your kpis, and calculate percent changes. Just call:
+
+`bundle exec rake daily_kpis_from_replica`
+
 #### *Reports*
 
 Reports are for when a single SQL query isn't enough, and you need some extra code to either combine multiple queries, pull data from an external API, or do another custom thing with the data.
