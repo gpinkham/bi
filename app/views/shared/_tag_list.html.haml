@@ -1,6 +1,6 @@
 .tags_list
   %ul.tags
-    - tags.sort_by! {|t| t.name}
+    - tags.order(:name)
     - tags.each do |t|
       %li.tag
         = link_to t, tag_path(model, t.name)

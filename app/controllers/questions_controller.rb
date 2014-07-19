@@ -79,4 +79,9 @@ class QuestionsController < ApplicationController
       format.json { render :json => @result }
     end
   end
+
+  def questions_params
+    params.require(:questions).permit(:name, :description, :question_sql, :tag_list, :data_source)
+  end
+
 end

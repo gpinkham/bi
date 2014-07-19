@@ -1,5 +1,4 @@
 class Question < ActiveRecord::Base
-  attr_accessible :name, :description, :question_sql, :tag_list, :data_source
   attr_reader :error
 
   acts_as_taggable
