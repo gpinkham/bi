@@ -22,3 +22,7 @@
 .DS_Store
 bin
 .swp
+.idea/*
+atlassian*
+*.iml
+

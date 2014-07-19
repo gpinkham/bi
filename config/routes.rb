@@ -1,5 +1,6 @@
-Bi::Application.routes.draw do
-  root :to => 'home#index'
+Rails.application.routes.draw do
+
+ root :to => 'home#index'
 
   resources :questions do
     member do
@@ -13,8 +14,8 @@ Bi::Application.routes.draw do
     end
   end
 
-  match 'questions/tags/:tag' => 'questions#tags', :as => 'question_tag'
-  match 'kpis/tags/:tag' => 'kpis#tags', :as => 'kpi_tag'
+  get 'questions/tags/:tag' => 'questions#tags', :as => 'question_tag'
+  get 'kpis/tags/:tag' => 'kpis#tags', :as => 'kpi_tag'
 
   resources :kpis do
     member do
@@ -33,6 +34,9 @@ Bi::Application.routes.draw do
   end
 
   resources :visualizations, :only => :index
-  match '/visualizations/:action', :controller => 'visualizations'
-  match '/kpi_menu' => 'kpis#kpi_menu', :as => 'kpi_menu'
+  get '/visualizations/:action', :controller => 'visualizations'
+  get '/kpi_menu' => 'kpis#kpi_menu', :as => 'kpi_menu'
+
+
+
 end
