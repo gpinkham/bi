@@ -1,5 +1,5 @@
 class KpiResult < ActiveRecord::Base
-  attr_accessible :date, :name, :event_type, :partner, :today, :t7days, :t30days, :today_pct_change, :t7days_pct_change, :t30days_pct_change, :qtd, :ytd, :kpi_id
+#  attr_accessible :date, :name, :event_type, :partner, :today, :t7days, :t30days, :today_pct_change, :t7days_pct_change, :t30days_pct_change, :qtd, :ytd, :kpi_id
 
   belongs_to :kpi
 

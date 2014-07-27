@@ -19,6 +19,9 @@ class DbConnection
     if @klass.nil?
       @klass = Class.new(ActiveRecord::Base) do
         self.abstract_class = true
+        def self.name
+          'DbConnectionHolder'
+        end
       end
       @klass.establish_connection(@credentials)
     end

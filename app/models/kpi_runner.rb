@@ -6,7 +6,7 @@ class KpiRunner
 
   def run_kpis
     add_db_kpis
-    add_performance_kpis
+    #add_performance_kpis
   end
 
   def add_performance_kpis
@@ -20,9 +20,11 @@ class KpiRunner
         print k.name
         k.calculate!(@date)
         print " - #{start - Time.now}\n"
-      rescue
+      rescue Exception => e
         print k.name
         print " - ERROR!!! -\n"
+        puts e.message
+        puts e.backtrace
       end
     end
   end

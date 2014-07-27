@@ -1,15 +1,14 @@
 class Kpi < ActiveRecord::Base
-  attr_accessible :name, :query, :active, :tag_list, :data_source
 
   acts_as_taggable
 
   has_many :kpi_results, :dependent => :destroy
 
-  scope :active, :conditions => {:active => true}
+  scope :active,  -> {where(active: true)}
 
   def self.results_for_tag_and_date(tag, date)
     kpi_ids = Kpi.tagged_with(tag).map(&:id)
-    KpiResult.scoped(:conditions => {:date => date, :kpi_id => kpi_ids})
+    KpiResult.where({:date => date, :kpi_id => kpi_ids})
   end
 
   def most_recent_result

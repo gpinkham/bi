@@ -36,7 +36,9 @@ class KpiCalculator
   end
 
   def sql_result
-    @kpi.query_connection.execute(build_sql).first
+    results = @kpi.query_connection.execute(build_sql)
+    puts results.inspect
+    results.first
   end
 
   def recalculate_result!

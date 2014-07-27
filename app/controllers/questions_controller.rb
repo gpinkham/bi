@@ -22,7 +22,7 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    @question = Question.new(params[:question])
+    @question = Question.new(questions_params)
     if @question.save
       redirect_to question_path(@question)
     else
@@ -36,7 +36,7 @@ class QuestionsController < ApplicationController
 
   def update
     @question = Question.find(params[:id])
-    if @question.update_attributes(params[:question])
+    if @question.update_attributes(questions_params)
       flash[:success] = "Question Updated"
       redirect_to question_path(@question)
     else
@@ -81,7 +81,7 @@ class QuestionsController < ApplicationController
   end
 
   def questions_params
-    params.require(:questions).permit(:name, :description, :question_sql, :tag_list, :data_source)
+    params.require(:question).permit(:name, :description, :question_sql, :tag_list, :data_source)
   end
 
 end

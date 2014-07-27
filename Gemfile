@@ -40,11 +40,6 @@ group :test do
   gem 'factory_girl_rails'
 end
 
-group :development do
-  gem 'pry-rails'
-  gem 'pry'
-end
-
 gem 'jquery-rails'
 
 # To use ActiveModel has_secure_password
@@ -61,3 +56,4 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'debugger'
+

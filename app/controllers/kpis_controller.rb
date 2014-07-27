@@ -2,8 +2,9 @@ class KpisController < ApplicationController
   skip_before_filter :require_user, :only => [:index, :show, :tags]
 
   def create
-    last_run_hash = {:last_run => Time.now, :last_succeeded => Time.now - 1.year}
-    @kpi = Kpi.new(params[:kpi].merge(last_run_hash))
+    # last_run_hash = {:last_run => Time.now, :last_succeeded => Time.now - 1.year}
+    # @kpi = Kpi.new(kpis_params.merge(last_run_hash))
+    @kpi = Kpi.new(kpis_params)
     if @kpi.save
       flash[:success] = "Kpi Added"
       redirect_to kpi_path(@kpi)
@@ -42,7 +43,7 @@ class KpisController < ApplicationController
 
   def update
     @kpi = Kpi.find(params[:id])
-    if @kpi.update_attributes(params[:kpi])
+    if @kpi.update_attributes(kpis_params)
       flash[:success] = "Kpi updated"
       redirect_to kpi_path(@kpi)
     else
@@ -87,6 +88,10 @@ class KpisController < ApplicationController
     @tag = params[:tag]
     @kpi.tag_list.add(@tag)
     @kpi.save
+  end
+
+  def kpis_params
+    params.require(:kpi).permit(:name, :query, :active, :tag_list, :data_source)
   end
 
 
